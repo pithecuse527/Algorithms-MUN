@@ -30,7 +30,7 @@ if __name__ == "__main__":
         name = sys.argv[1]
         stuID = sys.argv[2]
     
-    elif len(sys.argv) is not 1 :
+    elif len(sys.argv) != 1 :
         print("Please provide your name and student number corretly.")
         quit()
     
