@@ -21,10 +21,15 @@ def doPrint(name, stuID):
 if __name__ == "__main__":
     name = "HONGGEUN JI"
     stuID = "201948932"
+    l = len(sys.argv)
 
-    if len(sys.argv) in [2, 3] :     # if user input argv elements, and only provide two elements,
+    if l in [2, 3] :     # if user input argv elements, and only provide two elements,
+        if l is 2 :
+            print("Type error! Please provide your name and student ID at the same time.")
+            quit()     
+
         if not sys.argv[1].isalpha() or not sys.argv[2].isnumeric():
-            print("Type error! Only letters a-z allowed for name and only numbers 0-9 allowed for student number.")
+            print("Type error! Only letters a-z allowed for name and only numbers 0-9 allowed for student ID.")
             quit()
         
         name = sys.argv[1]
