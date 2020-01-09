@@ -23,12 +23,14 @@ if __name__ == "__main__":
     stuID = "201948932"
     l = len(sys.argv)
 
-    if l in [2, 3] :     # if user input argv elements, and only provide two elements,
+    if l in [2, 3] :    # if user input argv elements,
+        # check whether it is valid format or not 
+
         if l is 2 :
             print("Type error! Please provide your name and student ID at the same time.")
             quit()     
 
-        if not sys.argv[1].isalpha() or not sys.argv[2].isnumeric():
+        elif not sys.argv[1].isalpha() or not sys.argv[2].isnumeric():    # if user input wrong format,
             print("Type error! Only letters a-z allowed for name and only numbers 0-9 allowed for student ID.")
             quit()
         
