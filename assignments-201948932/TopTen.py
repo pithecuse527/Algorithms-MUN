@@ -22,10 +22,15 @@ def bubbleSort(lst):
 
 def returnTopTenList(lst):
     # find 10 largest integers from the list
-    pass
+    # sort first and take out the 10 integers from the list
+    
+    bubbleSort(lst)
+    top_lst = lst[-10:]
+    
+    return top_lst
     
 
 if __name__ == "__main__":
     lst = []
-    returnTopTenList(lst)
+    top_lst = returnTopTenList(lst)
     
