@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
         # after calling returnTopTenList(), the original list will be ordered
         top_lst = returnTopTenList(lst)
-        print("This is the top list -> " + str(top_lst))
+        print("\nThis is the top list -> " + str(top_lst))
         
     else:
         print("list must be longer than 10")
