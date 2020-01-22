@@ -25,3 +25,4 @@ if __name__ == "__main__":
     n = int(input("num? "))
     
     harmonic_num = harmonic(n)
+    print("The result : " + str(harmonic_num))
