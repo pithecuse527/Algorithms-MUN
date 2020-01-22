@@ -9,6 +9,8 @@
 ##  Returning top ten integers from given list
 ##  
 
+#!/usr/bin/python
+import random
 
 def bubbleSort(lst):
     # basic bubble sort
@@ -32,5 +34,18 @@ def returnTopTenList(lst):
 
 if __name__ == "__main__":
     lst = []
-    top_lst = returnTopTenList(lst)
+    n = int(input("how long do u want to make for the list? "))
     
+    # randomly make n integers
+    if n > 10:
+        for i in range(n):
+            lst.append(random.randint(1,100))
+            
+        print("This is the original random list -> " + str(lst))
+
+        # after calling returnTopTenList(), the original list will be ordered
+        top_lst = returnTopTenList(lst)
+        print("This is the top list -> " + str(top_lst))
+        
+    else:
+        print("list must be longer than 10")
