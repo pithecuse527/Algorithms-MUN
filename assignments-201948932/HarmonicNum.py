@@ -11,9 +11,15 @@
 
 #!/usr/bin/python
 
-def harmonic():
+def harmonic(n, i=1):
     
-    pass
+    # basis case (if index reaches the n)
+    if i == n :
+        return 1 / i
+    
+    # add them up
+    return (1 / i) + harmonic(n ,i+1)
+    
 
 if __name__ == "__main__":
     n = int(input("num? "))
