@@ -13,22 +13,22 @@
 
 class Stack:
     def __init__(self):
-         self.items = []
+        self.items = []
 
     def isEmpty(self):
-         return self.items == []
+        return self.items == []
 
     def push(self, item):
-         self.items.append(item)
+        self.items.append(item)
 
     def pop(self):
-         return self.items.pop()
+        return self.items.pop()
 
     def peek(self):
-         return self.items[len(self.items)-1]
+        return self.items[len(self.items)-1]
 
     def size(self):
-         return len(self.items)
+        return len(self.items)
          
     def makeDoubleDouble(self):
         pass
