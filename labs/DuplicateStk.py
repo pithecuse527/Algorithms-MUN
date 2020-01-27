@@ -14,7 +14,6 @@
 class Stack:
     def __init__(self):
         self.items = []
-        self.tmp_stk_lst = Stack()
         self.tmp_val = None
 
     def isEmpty(self):
