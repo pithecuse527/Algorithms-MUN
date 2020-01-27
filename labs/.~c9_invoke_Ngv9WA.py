@@ -14,8 +14,6 @@
 class Stack:
     def __init__(self):
         self.items = []
-        self.tmp_stk_lst = Stack()
-        self.tmp_val = None
 
     def isEmpty(self):
         return True
@@ -33,16 +31,9 @@ class Stack:
         return len(self.items)
          
     def makeDoubleDouble(self):
-        
         if self.isEmpty():
             raise("Empty Stack!")
         
-        while not isEmpty(self):
-            self.tmp_val = self.pop()
-            
-            for i in range(2):
-                self.items = 
-            
 
 
 if __name__ == "__main__":
