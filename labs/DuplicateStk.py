@@ -12,11 +12,12 @@
 #!/usr/bin/python
 
 import random
+import MyStack
 
 def makeDoubleDouble(stk_lst):
     # make stack list has two duplicate adjacent elements
     
-    tmp_stk_lst = Stack()
+    tmp_stk_lst = MyStack.Stack()
     
     while not stk_lst.isEmpty():
         tmp_stk_lst.push(stk_lst.pop())
@@ -24,31 +25,10 @@ def makeDoubleDouble(stk_lst):
     while not tmp_stk_lst.isEmpty():
         stk_lst.push(tmp_stk_lst.peek())
         stk_lst.push(tmp_stk_lst.pop())
-        
-
-class Stack:
-    def __init__(self):
-        self.items = []
-
-    def isEmpty(self):
-        if len(self.items) is 0 :
-            return True
-
-    def push(self, item):
-        self.items.append(item)
-
-    def pop(self):
-        return self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items)-1]
-
-    def size(self):
-        return len(self.items)
 
 
 if __name__ == "__main__":
-    stk_lst = Stack()
+    stk_lst = MyStack.Stack()
     
     for i in range(10):
         stk_lst.push(random.randint(1,50))
