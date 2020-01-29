@@ -14,11 +14,15 @@
 def makeDoubleDouble(stk_lst):
     # make stack list has two duplicate adjacent elements
     
-    tmp_stk_lst = []
+    tmp_stk_lst = Stack()
     
     while not stk_lst.isEmpty():
-        pass
+        tmp_stk_lst.push(stk_lst.pop())
     
+    while not tmp_stk_lst.isEmpty():
+        stk_lst.push(tmp_stk_lst.peek())
+        stk_lst.push(tmp_stk_lst.pop())
+        
 
 class Stack:
     def __init__(self):
@@ -49,3 +53,4 @@ if __name__ == "__main__":
     
     print(stk_lst.items)
     makeDoubleDouble(stk_lst)
+    print(stk_lst.items)
