@@ -11,6 +11,8 @@
 
 #!/usr/bin/python
 
+import random
+
 def makeDoubleDouble(stk_lst):
     # make stack list has two duplicate adjacent elements
     
@@ -48,8 +50,8 @@ class Stack:
 if __name__ == "__main__":
     stk_lst = Stack()
     
-    for i in range(5):
-        stk_lst.push(i)
+    for i in range(10):
+        stk_lst.push(random.randint(1,50))
     
     print(stk_lst.items)
     makeDoubleDouble(stk_lst)
