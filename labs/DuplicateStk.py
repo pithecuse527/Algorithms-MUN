@@ -15,9 +15,11 @@ class Stack:
     def __init__(self):
         self.items = []
         self.tmp_val = None
+        self.tmp_lst = []
 
     def isEmpty(self):
-        return True
+        if len(self.items) is 0 :
+            return True
 
     def push(self, item):
         self.items.append(item)
@@ -32,19 +34,23 @@ class Stack:
         return len(self.items)
          
     def makeDoubleDouble(self):
-        
-        if self.isEmpty():
-            raise("Empty Stack!")
-        
-        while not isEmpty(self):
+        while not self.isEmpty():
             self.tmp_val = self.pop()
             
             for i in range(2):
-                self.items = 
-            
+                self.push(tmp_val)
+        
+        self.items = self.tmp_lst
+        print(self.tmp_lst)
 
 
 if __name__ == "__main__":
     stk_lst = Stack()
+    
+    for i in range(5):
+        stk_lst.push(i)
+    
+    print(stk_lst.items)
     stk_lst.makeDoubleDouble()
+    # print(stk_lst.items)
     
