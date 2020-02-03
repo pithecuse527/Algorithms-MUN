@@ -48,7 +48,9 @@ class ArrayStack:
         try:
             p = self._data.pop()
         except:
-            print("Stack is empty!")
-            # raise
+            if self.is_empty():
+                print("Stack is empty!")
+            else:
+                print("There is a problem with your stack...")
         else:
             return p
