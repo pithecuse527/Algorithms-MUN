@@ -74,7 +74,7 @@ class ArrayQueue:
     def _resize(self, cap):                 # assume cap >= len(self)
         """Resize to a new list of capacity >- len(self)
         And realign the elements to a new list"""
-        old = self._data                    # keep track of existing list
+        old = self._data                    # keep track of existing list (shallow copy - default is the shallow copy)
         self._data = [None] * cap           # allocate list with new capacity
         walk = self._front
 
