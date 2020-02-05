@@ -61,31 +61,33 @@ def countByRecursive(tracer, count = 0):
     
 
 def findMid(head, trail):
-    """Find the middle node from the doubly-linked list"""
-    tracer1 = head
-    tracer2 = trail
+    """Find the middle node from the doubly-linked list
+    This algorithm has O(n)"""
+    tracer1 = head          # tracer1 will start from the head
+    tracer2 = trail         # tracer2 will start from the trial
     
-    while (tracer1.getRight() != tracer2) or (tracer1 != tracer2):
-        tracer1 = tracer1.getright()
-        tracer2 = tracer1.getleft()
+    while(True):
+        if tracer1.getRight() == tracer2:       # if the len(list) is even and tracer1, tracer2 reaches same middle position
+            break
+        elif tracer1 == tracer2:                # if the len(list) is odd and tracer1, tracer2 reaches same middle position
+            break
+        
+        tracer1 = tracer1.getRight()
+        tracer2 = tracer2.getLeft()
     
-    return tracer1, tracer2
+    return tracer1.getElement()
 
 if __name__ == "__main__":
     
-    n1 = MyNode.Node(2)
-    n2 = MyNode.Node(3)
-    n3 = MyNode.Node(4)
+    for i in range(4):
+        exec("n"+str(i)+"=MyNode.DoublyNode("+str(i)+")")
     
-    n1.setNext(n2)
-    n2.setNext(n3)
+    exec("n0.setRight(n1)")
     
-    m1 = MyNode.Node(2)
-    m2 = MyNode.Node(2)
-    m3 = MyNode.Node(2)
+    for i in range(1,3):
+        exec("n"+str(i)+".setRight(n"+str(i+1)+")")
+        exec("n"+str(i)+".setLeft(n"+str(i-1)+")")
     
-    m1.setNext(m2)
-    m2.setNext(m3)
+    exec("n3.setLeft(n2)")
     
-    print(countByRecursive(n1))
-    
+    exec("print(findMid(n0,n3))")
