@@ -27,8 +27,9 @@ def find(head):
     
 def connectList(L, M):
     """Connect the linked list L and M"""
+    tracer = L
     
-    while(L.getNext()):
+    while(tracer.getNext()):
         tracer = tracer.getNext()
     
     tracer.setNext() = M
