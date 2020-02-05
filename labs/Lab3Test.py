@@ -6,7 +6,7 @@
 ##  VIM - Vi IMproved 8.0
 ##  Copyright © 2020 Hong Guen Ji. All rights reserved.
 ##
-##  Finding second-to-last node in a singly linked list
+##  Codes for lab3 (MUN COMP 2002)
 ##
 
 #!/usr/bin/python
