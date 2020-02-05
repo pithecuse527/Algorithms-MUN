@@ -27,16 +27,16 @@ def find(head):
     return (tracer_behind.getElement(), tracer.getElement())
     
     
-def connectList(L, M):
-    """Connect the linked list L and M"""
-    tracer = L
+# def connectList(L, M):
+#     """Connect the linked list L and M"""
+#     tracer = L
     
-    while(tracer.getNext()):
-        tracer = tracer.getNext()
+#     while(tracer.getNext()):
+#         tracer = tracer.getNext()
     
-    tracer.setNext() = M
+#     tracer.setNext() = M
     
-    return L
+#     return L
  
     
 def countCircularLinkedList(head):
@@ -51,6 +51,16 @@ def countCircularLinkedList(head):
     return count
 
 
+def countByRecursive(tracer, count = 0):
+    """Count the number of nodes in a given linked list"""
+    if not tracer.getNext():
+        count += 1
+        return count
+        
+    count += 1
+    return countByRecursive(tracer.getNext(), count)
+    
+
 if __name__ == "__main__":
     
     n1 = MyNode.Node(2)
@@ -60,5 +70,12 @@ if __name__ == "__main__":
     n1.setNext(n2)
     n2.setNext(n3)
     
-    print(find(n1))
+    m1 = MyNode.Node(2)
+    m2 = MyNode.Node(2)
+    m3 = MyNode.Node(2)
+    
+    m1.setNext(m2)
+    m2.setNext(m3)
+    
+    print(countByRecursive(n1))
     
