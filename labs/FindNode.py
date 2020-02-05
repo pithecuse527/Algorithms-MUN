@@ -39,6 +39,16 @@ def find(head):
         tracer_behind = tracer
         tracer = tracer.getNext()
     
-    return (tracer, tracer_behind)
+    return (tracer_behind.getElement(), tracer.getElement())
 
 if __name__ == "__main__":
+    
+    n1 = Node(2)
+    n2 = Node(3)
+    n3 = Node(4)
+    
+    n1.setNext(n2)
+    n2.setNext(n3)
+    
+    print(find(n1))
+    
