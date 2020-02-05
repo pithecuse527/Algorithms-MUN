@@ -27,16 +27,15 @@ def find(head):
     return (tracer_behind.getElement(), tracer.getElement())
     
     
-# def connectList(L, M):
-#     """Connect the linked list L and M"""
-#     tracer = L
+def connectList(L, M):
+    """Connect the linked list L and M"""
+    tracer = L
     
-#     while(tracer.getNext()):
-#         tracer = tracer.getNext()
+    while(tracer.getNext()):
+        tracer = tracer.getNext()
+    tracer.setNext(M)
     
-#     tracer.setNext() = M
-    
-#     return L
+    return L
  
     
 def countCircularLinkedList(head):
@@ -60,6 +59,17 @@ def countByRecursive(tracer, count = 0):
     count += 1
     return countByRecursive(tracer.getNext(), count)
     
+
+def findMid(head, trail):
+    """Find the middle node from the doubly-linked list"""
+    tracer1 = head
+    tracer2 = trail
+    
+    while (tracer1.getRight() != tracer2) or (tracer1 != tracer2):
+        tracer1 = tracer1.getright()
+        tracer2 = tracer1.getleft()
+    
+    return tracer1, tracer2
 
 if __name__ == "__main__":
     
