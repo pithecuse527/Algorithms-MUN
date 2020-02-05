@@ -10,3 +10,31 @@
 ##
 
 #!/usr/bin/python
+
+class _Node:
+    """Lightweight, nonpublic class for storing a singly linked node"""
+    __slots__ = '_element', '_next'     # streamline memory usage
+    
+    def __init__(self, element = None, next = None):  # initialize node's fields
+        self._element = element         # reference to user's element
+        self._next = next               # reference to next node
+    
+    def getNext(self):
+        return self._next
+    
+    def getElement(self):
+        return self._element
+        
+def find(head):
+    tracer = head
+    tracer_behind = None
+    
+    while(tracer.getNext()):
+        tracer_behind = tracer
+        tracer = tracer.getNext()
+    
+    return (tracer, tracer_behind)
+
+if __name__ == "__main__":
+
+        
