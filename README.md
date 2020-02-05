@@ -7,3 +7,8 @@ Data Structures and Algorithms
 
 # Instructor
 Dr. Xianta Jiang
+
+# Materials
+Data Structures & Algorithms in Python [Goodrich, Tamassia & Goldwasser]
+
+
