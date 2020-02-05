@@ -12,7 +12,7 @@
 #!/usr/bin/python
 
 class Node:
-    """Lightweight, nonpublic class for storing a singly linked node"""
+    """Lightweight, public class for storing a singly linked node"""
     __slots__ = '_element', '_next'     # streamline memory usage
     
     def __init__(self, element = None, next = None):  # initialize node's fields
@@ -25,6 +25,34 @@ class Node:
     def setNext(self, next):
         self._next = next
     
+    def getElement(self):
+        return self._element
+        
+    def setElement(self, element):
+        self._element = element
+
+
+class DoublyNode:
+    """Lightweight, public class for storing a doubly linked node"""
+    __slots__ = '_element', '_left', '_right'     # streamline memory usage
+    
+    def __init__(self, element = None, left = None, right = None):  # initialize node's fields
+        self._element = element         # reference to user's element
+        self._left = left               # reference to left node
+        self._right = right             # reference to right node
+    
+    def getLeft(self):
+        return self._left
+    
+    def setLeft(self, left):
+        self._left = left
+    
+    def getRight(self):
+        return self._right
+    
+    def setRight(self, right):
+        self._right = right
+        
     def getElement(self):
         return self._element
         
