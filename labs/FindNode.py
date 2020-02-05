@@ -11,7 +11,7 @@
 
 #!/usr/bin/python
 
-class _Node:
+class Node:
     """Lightweight, nonpublic class for storing a singly linked node"""
     __slots__ = '_element', '_next'     # streamline memory usage
     
@@ -22,8 +22,14 @@ class _Node:
     def getNext(self):
         return self._next
     
+    def setNext(self, next):
+        self._next = next
+    
     def getElement(self):
         return self._element
+        
+    def setElement(self, element):
+        self._element = element
         
 def find(head):
     tracer = head
@@ -36,5 +42,3 @@ def find(head):
     return (tracer, tracer_behind)
 
 if __name__ == "__main__":
-
-        
