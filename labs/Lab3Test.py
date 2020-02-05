@@ -13,6 +13,7 @@
 
 import MyNode
         
+        
 def find(head):
     """Find two node
     One is the trail and the other one is the node behind the trail"""
@@ -25,6 +26,7 @@ def find(head):
     
     return (tracer_behind.getElement(), tracer.getElement())
     
+    
 def connectList(L, M):
     """Connect the linked list L and M"""
     tracer = L
@@ -35,6 +37,19 @@ def connectList(L, M):
     tracer.setNext() = M
     
     return L
+ 
+    
+def countCircularLinkedList(head):
+    """Count the number of nodes in a circularly linked list"""
+    tracer = head
+    count = 0
+    
+    while(tracer.getNext != head):
+        tracer = tracer.getNext()
+        count += 1
+    
+    return count
+
 
 if __name__ == "__main__":
     
