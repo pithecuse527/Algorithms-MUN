@@ -14,6 +14,8 @@
 import MyNode
         
 def find(head):
+    """Find two node
+    One is the trail and the other one is the node behind the trail"""
     tracer = head
     tracer_behind = None
     
@@ -22,6 +24,16 @@ def find(head):
         tracer = tracer.getNext()
     
     return (tracer_behind.getElement(), tracer.getElement())
+    
+def connectList(L, M):
+    """Connect the linked list L and M"""
+    
+    while(L.getNext()):
+        tracer = tracer.getNext()
+    
+    tracer.setNext() = M
+    
+    return L
 
 if __name__ == "__main__":
     
