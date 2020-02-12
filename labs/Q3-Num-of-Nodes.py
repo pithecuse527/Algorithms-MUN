@@ -11,21 +11,7 @@
 
 #!/usr/bin/python
 
-class TreeNode():
-    """The basic node class for the general tree"""
-    def __init__(self, val=None, children=[]):
-        self._val = val
-        self._children = children
-
-    def getChildren(self):
-        return self._children
-
-    def getVal(self):
-        return self._val
-        
-    def setChildren(self, children):
-        self._children = children
-
+from MyTreeNode import TreeNode
 
 def numOfNodes(root, val):
     """Count all nodes from the given general tree (recursive algorithm)"""
