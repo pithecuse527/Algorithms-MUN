@@ -40,6 +40,6 @@ if __name__ == "__main__":
     
     n1.setChildren([n2, n3])
     n2.setChildren([n4, n5])
-    n5.setChildren([n6])
+    n5.setChildren([n6, n7])
     
     print(numOfNodes(n1, n1.getVal()))

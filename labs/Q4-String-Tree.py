@@ -16,6 +16,7 @@ from MyTreeNode import TreeNode
 def maxDepth(node, depth=0):
     
     depth_hold = depth
+    node.setHeight(depth_hold)
     
     if len(node.getChildren()) == 0:        # if it is leaf
         return depth_hold
@@ -26,12 +27,19 @@ def maxDepth(node, depth=0):
         children_depth.append( maxDepth(i, depth_hold+1) )
     
     # Use the larger one
-    return max(children_depth)
+    # return max(children_depth)
     
 
 def printValHeight(node):
-    pass
-
+    
+    if node == None:
+        return
+    
+    print(node.getHeight(), node.getVal())
+    
+    for i in node.getChildren():
+        printValHeight(i)
+    
 if __name__ == "__main__":
     
     # ---------- setting the tree from l4 ---------- #
@@ -57,5 +65,6 @@ if __name__ == "__main__":
     n5.setChildren([n10,n11,n12,n13])
     n8.setChildren([n14,n15])
     # ---------- setting the tree from l4 ---------- #
-    print(maxDepth(n1))
+    maxDepth(n1)
+    print(printValHeight(n1))
     

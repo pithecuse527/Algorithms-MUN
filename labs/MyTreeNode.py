@@ -21,10 +21,12 @@ class TreeNode():
 
     def getVal(self):
         return self._val
+    
+    def getHeight(self):
+        return self._height
         
     def setChildren(self, children):
         self._children = children
     
     def setHeight(self, height):
         self._height = height
-    
