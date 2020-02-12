@@ -11,9 +11,10 @@
 
 class TreeNode():
     """The basic node class for the general tree"""
-    def __init__(self, val=None, children=[]):
+    def __init__(self, val=None, children=[], height=0):
         self._val = val
         self._children = children
+        self._height = height
 
     def getChildren(self):
         return self._children
@@ -23,3 +24,7 @@ class TreeNode():
         
     def setChildren(self, children):
         self._children = children
+    
+    def setHeight(self, height):
+        self._height = height
+    

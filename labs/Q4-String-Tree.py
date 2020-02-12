@@ -13,10 +13,23 @@
 
 from MyTreeNode import TreeNode
 
-def calHeight(root):
-    pass
+def maxDepth(node, depth=0):
+    
+    depth_hold = depth
+    
+    if len(node.getChildren()) == 0:        # if it is leaf
+        return depth_hold
 
-def printValHeight(root):
+    # Compute the depth of each subtree 
+    children_depth = []
+    for i in node.getChildren():
+        children_depth.append( maxDepth(i, depth_hold+1) )
+    
+    # Use the larger one
+    return max(children_depth)
+    
+
+def printValHeight(node):
     pass
 
 if __name__ == "__main__":
@@ -42,6 +55,7 @@ if __name__ == "__main__":
     n2.setChildren([n5,n6])
     n3.setChildren([n7,n8,n9])
     n5.setChildren([n10,n11,n12,n13])
-    n8.setChildren([[n14,n15]])
+    n8.setChildren([n14,n15])
     # ---------- setting the tree from l4 ---------- #
+    print(maxDepth(n1))
     
