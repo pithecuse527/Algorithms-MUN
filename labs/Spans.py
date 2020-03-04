@@ -38,7 +38,7 @@ def spans(data_lst):
 
 if __name__ == "__main__":
     
-    data_lst = [6,3,4,2,5,1,10]
+    data_lst = [6,3,4,7,5,1,10]
     #data_lst 
     #data_lst.items = [6,3,4,2,5,1,10]       # just for the test
     
