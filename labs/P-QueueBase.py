@@ -130,13 +130,15 @@ class SortedPriorityQueue(PriorityQueueBase):
         """Add a key-value pair (unsorted order)"""
         if self.isEmpty():
             self._head = self._Item(k, v)
-            # self._tail = self._head
+            self._tail = self._head
             return
+        
         item = self._Item(k, v)
         
         walk = self._head
         while walk.getNext():
             if walk.getNext().getVal() >= item.getVal():    break
+            walk = walk.getNext()
            
         item.setNext(walk.getNext())
         walk.setNext(item)
