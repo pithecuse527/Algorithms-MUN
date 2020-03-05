@@ -1,3 +1,5 @@
+import random
+
 class CircularDoublyLinkedList:
   """A circular doubly linked list representation."""
 
@@ -49,22 +51,65 @@ class CircularDoublyLinkedList:
     element = node._element                             # record deleted element
     node._prev = node._next = node._element = None      # deprecate node
     return element                                      # return deleted element
- 
+    
+  #-------------------------- public utilities --------------------------
+  
   def insertBeforeHeader(self, e):
-    #your code goes here to replace the pass
-    pass
+    """Create new node and add it before the header(_start)."""
+    tmp_node = self._Node(e, None, None)
+    
+    if self.is_empty():     # if it is first insert method call,
+      self._start = tmp_node
+      self._start._prev = self._start
+      self._start._next = self._start
+  
+    else:
+      predecessor_of_start = self._start._prev
+      tmp_node._next = self._start
+      tmp_node._prev = predecessor_of_start
+      predecessor_of_start._next = tmp_node
+      self._start._prev = tmp_node
+    
+    self._size += 1
 
   def insertAtEnd(self, e):
-    #your code goes here to replace the pass
-    pass
+    """Create new node and add it at the end.
+    This is same method with insertBeforeHeader() since the end of circular list is
+    same as before the start"""
+    self.insertBeforeHeader(e)
 
   def displayForward(self):
-    #your code goes here to replace the pass
-    pass
+    """Display all nodes (forward) from the Circular list."""
+    if self.is_empty():
+      print("Nothing to print...")
+      return
+    
+    walk = self._start._next
+    print(self._start._element)   # print the start element first
+    
+    while True:
+      if walk is self._start:   # if the walker reaches the start again, stop printing
+        break
+      
+      print(walk._element)
+      walk = walk._next
+    
   def displayBackward(self):
-    #your code goes here to replace the pass
-    pass
-  
+    """Display all nodes (backward) from the Circular list."""
+    if self.is_empty():
+      print("Nothing to print...")
+      return
+    
+    walk = self._start._prev
+    
+    while True:
+      if walk is self._start:   # if the walker reaches the start again, stop printing
+        break
+      
+      print(walk._element)
+      walk = walk._prev
+    print(self._start._element)   # print the start element at the last
+
 if __name__ == '__main__':
   cirLink = CircularDoublyLinkedList()
   cirLink.insertBeforeHeader(1)
@@ -72,5 +117,27 @@ if __name__ == '__main__':
   cirLink.insertBeforeHeader(3)
   cirLink.insertBeforeHeader(4)
   cirLink.insertBeforeHeader(5)
+  
+  print("This is forward display starting from the head.")
   cirLink.displayForward()
+  print()
+  print("This is backward display starting from next to the head.")
   cirLink.displayBackward()
+  print()
+  print()
+
+  # ===== other sample by using user's input ===== #
+  cirLink2 = CircularDoublyLinkedList()
+  n = int(input("How many elements do you want to put inside the circular list? "))
+  
+  # randomly make n integers
+  if n >= 1:
+      for i in range(n):
+          # lst.append(random.randint(1,100))
+          cirLink2.insertAtEnd(random.randint(1,20))
+  
+  print("This is forward display starting from the head.")
+  cirLink2.displayForward()
+  print()
+  print("This is backward display starting from next to the head.")
+  cirLink2.displayBackward()
