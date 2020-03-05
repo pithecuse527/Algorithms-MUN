@@ -9,6 +9,8 @@
 ##  Basic class for priority queue
 ##
 
+import random
+
 class PriorityQueueBase:
     """Abstract base calss for a priority queue"""
     
@@ -45,6 +47,18 @@ class PriorityQueueBase:
     def isEmpty(self):                 # concrete method assuming abstract len
         """Return True if the priority queue is empty"""
         return self._head is None
+    
+    def printKeyVal(self):
+        """Print all the keys and values from the P-Queue"""
+        if self.isEmpty():
+            print("priority queue is empty")
+            return None
+            
+        walk = self._head
+        
+        while walk:
+            print(str(walk.getKey())+" "+str(walk.getVal()))
+            walk = walk.getNext()
 
 
 class UnsortedPriorityQueue(PriorityQueueBase):
@@ -81,7 +95,7 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         item = self._findMin()
         return (item.getKey(), item.getVal())
     
-    def removeMin(self):
+    def removeMin(self):        # O(n)
         """Remove and return (k,v) tuple with minimun key"""
         if self.isEmpty():
             print("priority queue is empty")
@@ -91,14 +105,20 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         k = item._key
         v = item._value
         
-        walk = self._head
-        while True:
-            if walk.getNext() is item or walk is None:
-                break
-            walk = walk.getNext()
+        if not(self._head is self._tail):
+            walk = self._head
+            while True:
+                if not walk.getNext() or walk.getNext() is item:
+                    self._tail = walk
+                    break
+                # if walk is None or walk.getNext() is item:  break
+                walk = walk.getNext()
+            walk.setNext(item.getNext())
+            
+            item = None         # let the garbage collector do the work
         
-        walk.setNext(item.getNext())
-        item = None         # let the garbage collector do the work
+        else:
+            self._head = None
         
         return (k, v)
 
@@ -106,7 +126,7 @@ class UnsortedPriorityQueue(PriorityQueueBase):
 class SortedPriorityQueue(PriorityQueueBase):
     """A min-oriented priority queue implemented with an unsorted list"""
         
-    def add(self, k, v):
+    def add(self, k, v):        # O(n)
         """Add a key-value pair (unsorted order)"""
         if self.isEmpty():
             self._head = self._Item(k, v)
