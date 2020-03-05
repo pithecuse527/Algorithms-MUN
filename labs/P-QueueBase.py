@@ -36,7 +36,7 @@ class PriorityQueueBase:
         
         def setNext(self, n):
             self._next = n
-
+    
     def __init__(self):
         """Create a head of Priority Queue"""
         self._head = None
@@ -81,15 +81,15 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         item = self._findMin()
         return (item.getKey(), item.getVal())
     
-    def remove_min(self):
+    def removeMin(self):
         """Remove and return (k,v) tuple with minimun key"""
         if self.isEmpty():
             print("priority queue is empty")
             return None
         
         item = self._findMin()
-        return_key = item._key
-        return_val = item._value
+        k = item._key
+        v = item._value
         
         walk = self._head
         while True:
@@ -98,6 +98,49 @@ class UnsortedPriorityQueue(PriorityQueueBase):
             walk = walk.getNext()
         
         walk.setNext(item.getNext())
-        item = None
+        item = None         # let the garbage collector do the work
         
-        return (return_key, return_val)
+        return (k, v)
+
+
+class SortedPriorityQueue(PriorityQueueBase):
+    """A min-oriented priority queue implemented with an unsorted list"""
+        
+    def add(self, k, v):
+        """Add a key-value pair (unsorted order)"""
+        if self.isEmpty():
+            self._head = self._Item(k, v)
+            # self._tail = self._head
+            return
+        item = self._Item(k, v)
+        
+        walk = self._head
+        while walk.getNext():
+            if walk.getNext().getVal() >= item.getVal():    break
+           
+        item.setNext(walk.getNext())
+        walk.setNext(item)
+    
+    def min_(self):
+        """Return but do not remove (k,v) tuple with minimun key"""
+        item = self._head
+        k = item.getKey()
+        v = item.getVal()
+        
+        return (k, v)
+    
+    def removeMin(self):
+        """Remove and return (k,v) tuple with minimun key"""
+        if self.isEmpty():
+            print("priority queue is empty")
+            return None
+        
+        item = self._head
+        self._head = item.getNext()
+        item.setNext(None)
+        
+        k = item.getKey()
+        v = item.getVal()
+        item = None         # let the garbage collector do the work
+        
+        return (k, v)
