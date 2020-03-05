@@ -133,11 +133,10 @@ if __name__ == '__main__':
   # randomly make n integers
   if n >= 1:
       for i in range(n):
-          # lst.append(random.randint(1,100))
           cirLink2.insertAtEnd(random.randint(1,20))
   
   print("This is forward display starting from the head.")
   cirLink2.displayForward()
   print()
-  print("This is backward display starting from next to the head.")
+  print("This is backward display starting from prev to the head.")
   cirLink2.displayBackward()
