@@ -32,6 +32,13 @@ class CircularDoublyLinkedList:
     return self._size == 0
 
   #-------------------------- nonpublic utilities --------------------------
+  
+  def _first_insert(self, e):
+    """First insertion of the circular list"""
+    self._start = self._Node(e, None, None)
+    self._start._prev = self._start
+    self._start._next = self._start
+    self._size += 1
 
   def _insert_between(self, e, predecessor, successor):
     """Add element e between two existing nodes and return new node."""
@@ -54,28 +61,28 @@ class CircularDoublyLinkedList:
     
   #-------------------------- public utilities --------------------------
   
+  # todo:
+    # starter and tail is not same!! -> usually we think tail is next or prev of the start node
+    # consider using _insert_between method for insertBeforeHeader() and insertAtEnd()
+    # can the tail changed by the methods? if so, the insertBeforeHeader method and insertAtEnd is same. ->
+  
   def insertBeforeHeader(self, e):
     """Create new node and add it before the header(_start)."""
-    tmp_node = self._Node(e, None, None)
+    if self.is_empty():   # if this is the first insert method call,
+      print("As you do not have any start node yet, the given element will be a start node.")
+      self._first_insert(e)
+      return
     
-    if self.is_empty():     # if it is first insert method call,
-      self._start = tmp_node
-      self._start._prev = self._start
-      self._start._next = self._start
-  
-    else:
-      predecessor_of_start = self._start._prev
-      tmp_node._next = self._start
-      tmp_node._prev = predecessor_of_start
-      predecessor_of_start._next = tmp_node
-      self._start._prev = tmp_node
-    
-    self._size += 1
+    try:    # if there is more than one nodes,
+      self._insert_between(e, self._start._prev, self._start)
+    except:
+      print("insertion unsuccessful...")
+      return
 
   def insertAtEnd(self, e):
     """Create new node and add it at the end.
-    This is same method with insertBeforeHeader() since the end of circular list is
-    same as before the start"""
+    This method task is same as insertBeforeHeader()
+    The tail will be changed since we put the given element to the end"""
     self.insertBeforeHeader(e)
 
   def displayForward(self):
