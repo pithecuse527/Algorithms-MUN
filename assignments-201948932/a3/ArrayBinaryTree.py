@@ -1,6 +1,8 @@
 class ArrayBinaryTree:
   """ Array based binary tree implementation, root starts 1
   """
+  # from ArrayBinaryTree import ArrayBinaryTree
+  # bt = ArrayBinaryTree()
   # ----some methods may help----
   def _parentIdex(self, j):
     return (j-1) // 2
@@ -12,12 +14,18 @@ class ArrayBinaryTree:
     return 2*j + 1
 
   # todo1:
-    # are these methods are baed on complete binary tree??
+    # are these methods are baed on complete binary tree?? -> could be yes or no
+    
   def _hasLeft(self, j):
-    return self._leftIdex(j) <= self._size     # index beyond end of list?
+    # for ordinary binary tree
+    return self._leftIdex(j) < len(self._data) and self._data[self._leftIdex(j)] is not None
+    # return self._leftIdex(j) <= self._size     # index beyond end of list?
   
   def _hasRight(self, j):
-    return self._rightIdex(j) <= self._size    # index beyond end of list?
+    # for ordinary binary tree
+    tmp = self._rightIdex(j)
+    return self._rightIdex(j) < len(self._data) and self._data[self._rightIdex(j)] is not None
+    # return self._rightIdex(j) <= self._size    # index beyond end of list?
 
   def _childrenIdex(self,idx):
     return [self._leftIdex(idx),self._rightIdex(idx)]
@@ -85,7 +93,7 @@ class ArrayBinaryTree:
     #make sure to check whether the current, the child exist
     
     # if the given index's node is root or exist, and has left child,
-    if (cur == self._root or self.parent(cur)) and self._hasLeft(cur):
+    if self._data[cur] and self._hasLeft(cur):
       self._data[self._leftIdex(cur)] = v
     else:
       print("There is no left child node or the given index's node is not exist")
@@ -95,7 +103,7 @@ class ArrayBinaryTree:
     #make sure to check whether the current, the child exist
     
     # if the given index's node is root or exist, and has right child,
-    if (cur == self._root or self.parent(cur)) and self._hasRight(cur):
+    if self._data[cur] and self._hasRight(cur):
       self._data[self._rightIdex(cur)] = v
     else:
       print("There is no right child node or the given index's node is not exist")
@@ -124,13 +132,18 @@ class ArrayBinaryTree:
     """insert to the right node. Increase the array size if needed."""
     #make sure to check whether the current, the child exist; if the child exist, recursively go right
     #also check the array space, expand it if needed using _resize method
+    if not self._data[cur]:   # base case1
+      print("The given index's node is not exist")
+      return
     
-    if (cur == self._root or self.parent(cur)) and not self._hasRight(cur):    # base case
-      if self._rightIdex(cur) >= self._size:  self._resize(self._size * 2)    # if the list needs more size,
-      self._data[self._rightIdex(cur)] = v
+    if not self._hasRight(cur):    # base case2
+      if self._rightIdex(cur) >= len(self._data):  self._resize(len(self._data))    # if the list needs more size,
+      tmp = self._rightIdex(cur)
+      self._data[tmp] = v
       self._size += 1
+      return 
           
-    self.insertRight(self._rightIdex(cur), v)
+    return self.insertRight(self._rightIdex(cur), v)
 
   def inOrder(self):
     """Print an inorder iteration of nodes in the tree."""
@@ -182,14 +195,15 @@ if __name__ == '__main__':
 #testing code
   bt = ArrayBinaryTree()
   bt.insertRoot(1)
-  bt.insertLeft(1,2)
+  # bt.insertLeft(1,2)
   bt.insertRight(1,3)
-  bt.insertLeft(1,4)
-  bt.insertRight(2,5)
-  bt.insertLeft(3,6)
-  bt.insertRight(1,7)
+  bt.insertRight(1,3)
+  # bt.insertLeft(1,4)
+  # bt.insertRight(2,5)
+  # bt.insertLeft(3,6)
+  # bt.insertRight(1,7)
   bt.printTreeArray()
-  bt.inOrder()
-  bt.postOrder()
-  bt.preOrder()
+  # bt.inOrder()
+  # bt.postOrder()
+  # bt.preOrder()
   
