@@ -43,23 +43,36 @@ class ArrayBinaryTree:
     return [self.left(idx),self.right(idx)]
 
   def left(self,idx):
-    #your code goes here to replace "pass"
-    pass
+    """ return the position that represents the left child of idx, or None if
+    idx has no left child """
+    if not self._hasLeft(idx):
+      print("There is no left child...")
+      return None
+    
+    return self._leftIdex(idx)
 
   def right(self,idx):
-    #your code goes here to replace "pass"
-    pass
+    """ return the position that represents the right child of idx, or None if
+    idx has no right child """
+    if not self._hasRight(idx):
+      print("There is no right child...")
+      return None
+    
+    return self._rightIdex(idx)
 
   def isInternal(self,idx):
-    #your code goes here to replace "pass"
-    pass
+    """ check whether the given idx node is internal or not """
+    return self._hasLeft(idx) or self._hasRight(idx)
 
   def isExternal(self,idx):
-    #your code goes here to replace "pass"
-    pass
+    """ check whether the given idx node is external or not """
+    return not (self._hasLeft(idx) or self._hasRight(idx))
   
   def setRoot(self,v):
-    if self._data[cur] == None:#if the root does not exist
+    """ set the value of root """
+    cur = self._root
+    
+    if self._data[cur] == None:   #if the root does not exist
       print("The root node does not exist")
       return None
     self._data[cur] = v
