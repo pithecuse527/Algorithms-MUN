@@ -120,13 +120,17 @@ class ArrayBinaryTree:
     """recursively insert to the left node. Increase the array size if needed."""
     #make sure to check whether the current, the child exist; if the child exist, recursively go left
     #also check the array space, expand it if needed using _resize method
+    if not self._data[cur]:   # base case1
+      print("The given index's node is not exist")
+      return
     
-    if (cur == self._root or self.parent(cur)) and not self._hasLeft(cur):    # base case
-        if self._leftIdex(cur) >= self._size:  self._resize(self._size * 2)    # if the list needs more size,
-        self._data[self._leftIdex(cur)] = v
-        self._size += 1
-        
-    self.insertLeft(self._leftIdex(cur), v)
+    if not self._hasLeft(cur):    # base case2
+      if self._leftIdex(cur) >= len(self._data):  self._resize(len(self._data)*2)    # if the list needs more size,
+      self._data[self._leftIdex(cur)] = v
+      self._size += 1
+      return 
+          
+    return self.insertLeft(self._leftIdex(cur), v)
 
   def insertRight(self,cur,v):
     """insert to the right node. Increase the array size if needed."""
@@ -137,9 +141,8 @@ class ArrayBinaryTree:
       return
     
     if not self._hasRight(cur):    # base case2
-      if self._rightIdex(cur) >= len(self._data):  self._resize(len(self._data))    # if the list needs more size,
-      tmp = self._rightIdex(cur)
-      self._data[tmp] = v
+      if self._rightIdex(cur) >= len(self._data):  self._resize(len(self._data)*2)    # if the list needs more size,
+      self._data[self._rightIdex(cur)] = v
       self._size += 1
       return 
           
@@ -188,20 +191,24 @@ class ArrayBinaryTree:
     """Resize to a new list of capacity >= len(self)."""
     old = self._data                       # keep track of existing list
     self._data = [None] * cap              # allocate list with new capacity
-    for k in range(self._size):            # only consider existing elements
+    for k in range(len(old)):            # only consider existing elements
       self._data[k] = old[k]              # intentionally shift indices
 
 if __name__ == '__main__':
 #testing code
   bt = ArrayBinaryTree()
   bt.insertRoot(1)
-  # bt.insertLeft(1,2)
+  bt.insertLeft(1,2)
   bt.insertRight(1,3)
   bt.insertRight(1,3)
-  # bt.insertLeft(1,4)
-  # bt.insertRight(2,5)
-  # bt.insertLeft(3,6)
-  # bt.insertRight(1,7)
+  bt.insertLeft(1,4)
+  bt.insertRight(2,5)
+  bt.insertLeft(3,6)
+  bt.insertRight(1,7)
+  bt.printTreeArray()
+  bt.setLeft(3,9)
+  bt.setRight(2,10)
+  bt.setRight(5,2)
   bt.printTreeArray()
   # bt.inOrder()
   # bt.postOrder()
