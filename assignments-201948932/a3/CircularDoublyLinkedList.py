@@ -64,7 +64,8 @@ class CircularDoublyLinkedList:
   # todo:
     # starter and tail is not same!! -> usually we think tail is next or prev of the start node
     # consider using _insert_between method for insertBeforeHeader() and insertAtEnd()
-    # can the tail changed by the methods? if so, the insertBeforeHeader method and insertAtEnd is same. ->
+    # can the tail changed by the methods? if so, the insertBeforeHeader method and insertAtEnd are same. ->
+    # insert methods can change the starting point
   
   def insertBeforeHeader(self, e):
     """Create new node and add it before the header(_start)."""
@@ -74,16 +75,28 @@ class CircularDoublyLinkedList:
       return
     
     try:    # if there is more than one nodes,
-      self._insert_between(e, self._start._prev, self._start)
+      self._start = self._insert_between(e, self._start._prev, self._start)
     except:
       print("insertion unsuccessful...")
       return
 
   def insertAtEnd(self, e):
     """Create new node and add it at the end.
-    This method task is same as insertBeforeHeader()
-    The tail will be changed since we put the given element to the end"""
-    self.insertBeforeHeader(e)
+    The tail will be changed since we put the given element to the end. (tail will be the given end node)
+    But the head will not be changed. This is the difference between inserting before header and inserting at the end.
+    This method is based on the concept which is regarding the tail always be the prev of the head."""
+    # self.insertBeforeHeader(e)    # this is not true since the head will be changed
+    
+    if self.is_empty():   # if this is the first insert method call,
+      print("As you do not have any start node yet, the given element will be a start node.")
+      self._first_insert(e)
+      return
+      
+    try:    # if there is more than one nodes,
+      self._insert_between(e, self._start._prev, self._start)   # even if the method return a node, the node should not be the head
+    except:
+      print("insertion unsuccessful...")
+      return
 
   def displayForward(self):
     """Display all nodes (forward) from the Circular list. Starting from the head to the end."""
@@ -93,10 +106,12 @@ class CircularDoublyLinkedList:
     
     walk = self._start._next      # starting from the head
     
-    print(self._start._element)   # print the start element first
+    print(self._start._element, end=' ')   # print the start element first
     while walk is not self._start:
-      print(walk._element)
+      print(walk._element, end=' ')
       walk = walk._next
+      
+    print()   # for newline
     
   def displayBackward(self):
     """Display all nodes (backward) from the Circular list. Starting from the end to the head."""
@@ -107,7 +122,7 @@ class CircularDoublyLinkedList:
     walk = self._start._prev  # starting from the end
     
     while walk is not self._start:
-      print(walk._element)
+      print(walk._element, end=' ')
       walk = walk._prev
     print(self._start._element)   # print the start element at the last
 
@@ -128,16 +143,44 @@ if __name__ == '__main__':
   print()
 
   # ===== other sample by using user's input ===== #
+  
+  # test1: randomly make n integers
   cirLink2 = CircularDoublyLinkedList()
   n = int(input("How many elements do you want to put inside the circular list? "))
   
-  # randomly make n integers
   if n >= 1:
       for i in range(n):
-          cirLink2.insertAtEnd(random.randint(1,20))
+          cirLink2.insertAtEnd(random.randint(1,20))    # using insertAtEnd() method to test
   
   print("This is forward display starting from the head.")
   cirLink2.displayForward()
   print()
   print("This is backward display starting from prev to the head.")
   cirLink2.displayBackward()
+
+  #test2: randomly make n integers and insert methods randomly
+  cirLink3 = CircularDoublyLinkedList()
+  n = int(input("How many elements do you want to put inside the circular list? "))
+  print()
+  
+  if n >= 1:
+    for i in range(n):
+      mod = random.randint(1,2)
+      tmp = random.randint(1,20)
+      if mod == 1:    # use insertBeforeHeader()
+        print("Inserting "  +str(tmp) + " before the head")
+        cirLink3.insertBeforeHeader(tmp)
+        print("Current list stat(forward) : ", end='')
+        cirLink3.displayForward()
+        print("Current list stat(backward) : ", end='')
+        cirLink3.displayBackward()
+        print()
+        
+      else:
+        print("Inserting " + str(tmp) + " at the end")
+        cirLink3.insertAtEnd(tmp)
+        print("Current list stat(forward) : ", end='')
+        cirLink3.displayForward()
+        print("Current list stat(backward) : ", end='')
+        cirLink3.displayBackward()
+        print()
