@@ -11,6 +11,8 @@ class ArrayBinaryTree:
   def _rightIdex(self, j):
     return 2*j + 1
 
+  # todo1:
+    # are these methods are baed on complete binary tree??
   def _hasLeft(self, j):
     return self._leftIdex(j) <= self._size     # index beyond end of list?
   
@@ -80,15 +82,23 @@ class ArrayBinaryTree:
 
   def setLeft(self,cur,v):
     """set the left node value."""
-    #your code goes here to replace "pass"
     #make sure to check whether the current, the child exist
-    pass
+    
+    # if the given index's node is root or exist, and has left child,
+    if (cur == self._root or self.parent(cur)) and self._hasLeft(cur):
+      self._data[self._leftIdex(cur)] = v
+    else:
+      print("There is no left child node or the given index's node is not exist")
 
   def setRight(self,cur,v):
     """set the right node value."""
-    #your code goes here to replace "pass"
     #make sure to check whether the current, the child exist
-    pass
+    
+    # if the given index's node is root or exist, and has right child,
+    if (cur == self._root or self.parent(cur)) and self._hasRight(cur):
+      self._data[self._rightIdex(cur)] = v
+    else:
+      print("There is no right child node or the given index's node is not exist")
 
   def insertRoot(self, v):
     if not self._data[self._root] == None:
@@ -100,17 +110,27 @@ class ArrayBinaryTree:
 
   def insertLeft(self,cur,v):
     """recursively insert to the left node. Increase the array size if needed."""
-    #your code goes here to replace "pass"
     #make sure to check whether the current, the child exist; if the child exist, recursively go left
     #also check the array space, expand it if needed using _resize method
-    pass
+    
+    if (cur == self._root or self.parent(cur)) and not self._hasLeft(cur):    # base case
+        if self._leftIdex(cur) >= self._size:  self._resize(self._size * 2)    # if the list needs more size,
+        self._data[self._leftIdex(cur)] = v
+        self._size += 1
+        
+    self.insertLeft(self._leftIdex(cur), v)
 
   def insertRight(self,cur,v):
     """insert to the right node. Increase the array size if needed."""
-    #your code goes here to replace "pass"
     #make sure to check whether the current, the child exist; if the child exist, recursively go right
     #also check the array space, expand it if needed using _resize method
-    pass
+    
+    if (cur == self._root or self.parent(cur)) and not self._hasRight(cur):    # base case
+      if self._rightIdex(cur) >= self._size:  self._resize(self._size * 2)    # if the list needs more size,
+      self._data[self._rightIdex(cur)] = v
+      self._size += 1
+          
+    self.insertRight(self._rightIdex(cur), v)
 
   def inOrder(self):
     """Print an inorder iteration of nodes in the tree."""
