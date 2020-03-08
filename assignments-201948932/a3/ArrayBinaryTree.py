@@ -152,7 +152,7 @@ class ArrayBinaryTree:
     """Print an inorder iteration of nodes in the tree."""
     if not self.isEmpty():
       for p in self._subtree_inorder(self._root):
-        print(p)
+        print(p, end=' ')
   
   def _subtree_inorder(self, p):
     """Generate an inorder iteration of nodes in subtree rooted at p."""
@@ -168,22 +168,34 @@ class ArrayBinaryTree:
     """Print a preorder of nodes in the tree."""
     if not self.isEmpty():
       for p in self._subtree_preorder(self._root):  # start recursion
-        print(p)
+        print(p, end=' ')
 
   def _subtree_preorder(self, p):
     """Generate a preorder iteration of positions in subtree rooted at p."""
-    #your code goes here to replace "pass"
+    yield self._data[p]            # visit p between its subtrees
+    if self._hasLeft(p):          # if left child exists, traverse its subtree
+      for other in self._subtree_preorder(self._leftIdex(p)):
+        yield other
+    if self._hasRight(p):         # if right child exists, traverse its subtree
+      for other in self._subtree_preorder(self._rightIdex(p)):
+        yield other
 
   def postOrder(self):
     """Print a postorder of nodes in the tree."""
     if not self.isEmpty():
       for p in self._subtree_postorder(self._root):  # start recursion
-        print(p)
+        print(p, end=' ')
 
   def _subtree_postorder(self, p):
     """Generate a postorder iteration of node in subtree rooted at p."""
-    #your code goes here to replace "pass"
-  
+    if self._hasLeft(p):          # if left child exists, traverse its subtree
+      for other in self._subtree_postorder(self._leftIdex(p)):
+        yield other
+    if self._hasRight(p):         # if right child exists, traverse its subtree
+      for other in self._subtree_postorder(self._rightIdex(p)):
+        yield other
+    yield self._data[p]            # visit p between its subtrees
+
   def printTreeArray(self):
     print(self._data)
 
@@ -208,9 +220,12 @@ if __name__ == '__main__':
   bt.printTreeArray()
   bt.setLeft(3,9)
   bt.setRight(2,10)
-  bt.setRight(5,2)
+  print("After some setting nodes : ", end='')
   bt.printTreeArray()
-  # bt.inOrder()
-  # bt.postOrder()
-  # bt.preOrder()
+  print("\n\nThis is the inorder traverse : ", end='')
+  bt.inOrder()
+  print("\nThis is the postorder traverse : ", end='')
+  bt.postOrder()
+  print("\nThis is the preorder traverse : ", end='')
+  bt.preOrder()
   
