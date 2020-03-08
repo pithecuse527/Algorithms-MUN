@@ -86,33 +86,27 @@ class CircularDoublyLinkedList:
     self.insertBeforeHeader(e)
 
   def displayForward(self):
-    """Display all nodes (forward) from the Circular list."""
+    """Display all nodes (forward) from the Circular list. Starting from the head to the end."""
     if self.is_empty():
       print("Nothing to print...")
       return
     
-    walk = self._start._next
-    print(self._start._element)   # print the start element first
+    walk = self._start._next      # starting from the head
     
-    while True:
-      if walk is self._start:   # if the walker reaches the start again, stop printing
-        break
-      
+    print(self._start._element)   # print the start element first
+    while walk is not self._start:
       print(walk._element)
       walk = walk._next
     
   def displayBackward(self):
-    """Display all nodes (backward) from the Circular list."""
+    """Display all nodes (backward) from the Circular list. Starting from the end to the head."""
     if self.is_empty():
       print("Nothing to print...")
       return
     
-    walk = self._start._prev
+    walk = self._start._prev  # starting from the end
     
-    while True:
-      if walk is self._start:   # if the walker reaches the start again, stop printing
-        break
-      
+    while walk is not self._start:
       print(walk._element)
       walk = walk._prev
     print(self._start._element)   # print the start element at the last
