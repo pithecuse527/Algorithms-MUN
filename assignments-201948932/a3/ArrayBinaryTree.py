@@ -1,8 +1,7 @@
 class ArrayBinaryTree:
   """ Array based binary tree implementation, root starts 1
   """
-  # from ArrayBinaryTree import ArrayBinaryTree
-  # bt = ArrayBinaryTree()
+
   # ----some methods may help----
   def _parentIdex(self, j):
     return (j-1) // 2
@@ -12,9 +11,6 @@ class ArrayBinaryTree:
   
   def _rightIdex(self, j):
     return 2*j + 1
-
-  # todo1:
-    # are these methods are baed on complete binary tree?? -> could be yes or no
     
   def _hasLeft(self, j):
     # for ordinary binary tree
@@ -23,7 +19,6 @@ class ArrayBinaryTree:
   
   def _hasRight(self, j):
     # for ordinary binary tree
-    tmp = self._rightIdex(j)
     return self._rightIdex(j) < len(self._data) and self._data[self._rightIdex(j)] is not None
     # return self._rightIdex(j) <= self._size    # index beyond end of list?
 
