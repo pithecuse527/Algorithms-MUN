@@ -215,7 +215,7 @@ if __name__ == '__main__':
   bt.printTreeArray()
   bt.setLeft(3,9)
   bt.setRight(2,10)
-  print("After some setting nodes : ", end='')
+  print("After setting some nodes : ", end='')
   bt.printTreeArray()
   print("\n\nThis is the inorder traverse : ", end='')
   bt.inOrder()
