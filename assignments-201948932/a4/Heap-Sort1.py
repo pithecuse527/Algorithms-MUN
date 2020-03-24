@@ -44,11 +44,17 @@ def downHeap(arr, st_pnt):
             target = right_child
         
         # if they needs to be swapped, swap and walk down
-        if arr[st_pnt] < arr[target]:
-            arr[st_pnt], arr[target] = arr[target], arr[st_pnt]
+        if arr[walker] < arr[target]:
+            arr[walker], arr[target] = arr[target], arr[walker]
             walker = target    
         else:
             stop = True
     
     # move to next subtree
     downHeap(arr, st_pnt-1)
+    
+if __name__ == '__main__':
+    tmp= [89,29,23,36,48,94,13,27,70,76,37,42,58]
+    
+    downHeap(tmp, 6)
+    print(tmp)
