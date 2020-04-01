@@ -64,7 +64,7 @@ class CircularDoublyLinkedList:
   # todo:
     # starter and tail is not same!! -> usually we think tail is next or prev of the start node
     # consider using _insert_between method for insertBeforeHeader() and insertAtEnd()
-    # can the tail changed by the methods? if so, the insertBeforeHeader method and insertAtEnd are same. ->
+    # can the tail changed by the methods? if so, the insertBeforeHeader method and insertAtEnd are same. -> not same!
     # insert methods can change the starting point
   
   def insertBeforeHeader(self, e):

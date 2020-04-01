@@ -1,10 +1,9 @@
 # Name and Student ID
-Hong Geun Ji
+Hong Geun Ji<br />
 201948932
 
 # Course
-Computer Science 2002
-Data Structures and Algorithms
+COMP 2002 Assignment3
 
 # Instructor
 Dr. Xianta Jiang
@@ -29,7 +28,6 @@ Data Structures & Algorithms in Python [Goodrich, Tamassia & Goldwasser]
 5. All codes for methods have comments at the first line
 
 # History
-Here is my history for the assignment3
-https://github.com/pithecuse527/Algorithms-MUN/tree/master/assignments-201948932/a3
-
+Here is my history for the assignment3<br />
+https://github.com/pithecuse527/Algorithms-MUN/tree/master/assignments-201948932/a3<br />
 Thank you.

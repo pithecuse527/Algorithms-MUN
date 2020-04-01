@@ -10,6 +10,7 @@
 ##  
 
 #!/usr/bin/python
+import random
 
 def downHeap(arr, st_pnt):
     """ Downheap from the given key parameter
@@ -55,6 +56,11 @@ def downHeap(arr, st_pnt):
     
 if __name__ == '__main__':
     tmp= [89,29,23,36,48,94,13,27,70,76,37,42,58]
+    tmp2 = []
     
-    downHeap(tmp, 6)
-    print(tmp)
+    for i in range(10):
+        tmp2.append(random.randint(1,50))
+    
+    print(tmp2)
+    downHeap(tmp2, 6)
+    print(tmp2)

@@ -115,11 +115,11 @@ class ArrayBinaryTree:
     """recursively insert to the left node. Increase the array size if needed."""
     #make sure to check whether the current, the child exist; if the child exist, recursively go left
     #also check the array space, expand it if needed using _resize method
-    if not self._data[cur]:   # base case1
+    if not self._data[cur]:   # check the cur's node is exist
       print("The given index's node is not exist")
       return
     
-    if not self._hasLeft(cur):    # base case2
+    if not self._hasLeft(cur):    # base case
       if self._leftIdex(cur) >= len(self._data):  self._resize(len(self._data)*2)    # if the list needs more size,
       self._data[self._leftIdex(cur)] = v
       self._size += 1
@@ -131,11 +131,11 @@ class ArrayBinaryTree:
     """insert to the right node. Increase the array size if needed."""
     #make sure to check whether the current, the child exist; if the child exist, recursively go right
     #also check the array space, expand it if needed using _resize method
-    if not self._data[cur]:   # base case1
+    if not self._data[cur]:   # check the cur's node is exist
       print("The given index's node is not exist")
       return
     
-    if not self._hasRight(cur):    # base case2
+    if not self._hasRight(cur):    # base case
       if self._rightIdex(cur) >= len(self._data):  self._resize(len(self._data)*2)    # if the list needs more size,
       self._data[self._rightIdex(cur)] = v
       self._size += 1
@@ -194,7 +194,7 @@ class ArrayBinaryTree:
   def printTreeArray(self):
     print(self._data)
 
-  def _resize(self, cap):                  # we assume cap >= len(self)
+  def _resize(self, cap):                  # we assume cap >= len(self._data)
     """Resize to a new list of capacity >= len(self)."""
     old = self._data                       # keep track of existing list
     self._data = [None] * cap              # allocate list with new capacity

@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
+""" Hong Geun Ji 201948932 """
+""" Detecting the unbalance patter is completed but not completed rotation and updating height"""
+
+
+
+
+
 class AVL:
   """Binary search tree based on 'BTNode's."""
   __slots__ = 'root'
@@ -76,7 +83,7 @@ class AVL:
       self.root = node
     else:
       _insertNode(self.root, node)
-      self._rebalance(node)# This method should be implemented by you
+      self._rebalance(node.parent, node)# This method should be implemented by you
       
   def _subtree_last_position(self, p):
     """Return Node of last item in subtree rooted at p."""
@@ -119,7 +126,7 @@ class AVL:
       # now p has at most one child
     parent = p.parent
     self._delete(p)
-    self._rebalance(parent)               # This method should be implemented by you
+    # self._rebalance(parent)               # This method should be implemented by you
         
       
   def _subtree_search(self, p, k):
@@ -152,7 +159,7 @@ class AVL:
     def _print_inOrder(root):
       if root != None:
         _print_inOrder(root.left)
-        print([root.element,root.height], end=' ')
+        print([root.element, root.height])
         _print_inOrder(root.right)
         
     def _print_preOrder(root):
@@ -169,22 +176,146 @@ class AVL:
     print();
     
 #-------implement _rebalance methods. You may look at the code from the textbook for clarification, but you must modify to adapt to this code. ----
-  def _rebalance(self, p):
-    pass #this is just for place holder, it should be replaced by your own code
+  def _calHeight(self, root):
+    if root is None:
+        return -1
+    return max(self._calHeight(root.left), self._calHeight(root.right)) + 1
+    
+  def _patternRec(self, start_node, node):
+    """Find the unbalance pattern"""
+    pattern = ""
+    
+    for i in range(2):
+      if start_node.element <= node.element:
+        pattern += "R"
+        start_node = start_node.right
+      else:
+        pattern += "L"
+        start_node = start_node.left
+    return pattern
+    
+  def _rebalance(self, p, node):
+    """Update every subtree's heights and rotate or revise nodes based on the unbalance pattern"""
+    
+    def __updateHeight(node):
+      walker = node
+      while walker:
+        walker.height = self._calHeight(walker)
+        walker = walker.parent
+    
+    # Update height
+    __updateHeight(p)
+
+    # Find unbalance pattern
+    walker = p
+    pattern = None
+    while walker:
+      if abs(walker.left_height() - walker.right_height()) > 1:
+        #print(walker.element, walker.left_height(), walker.right_height())
+        pattern = self._patternRec(walker, node)
+        print(pattern+" detected!")
+        break
+      walker = walker.parent
+      
+    def __removeLink(node):
+      node.parent = None
+      node.left = None
+      node.right = None
+      node.height = -1
+    
+    # Follow the rotating rules according to the unbalance pattern
+    if pattern == "LL":
+      _tmp1 = p
+      _tmp2 = p.parent
+      _tmp3 = p.left
+      _tmp4 = p.right
+      _tmp5 = p.parent.parent
+      
+      __removeLink(_tmp1)
+      __removeLink(_tmp2)
+      __removeLink(_tmp3)
+      if _tmp4: __removeLink(_tmp4)
+      if _tmp5: __removeLink(_tmp5)
+      
+      _tmp1.parent = _tmp5
+      _tmp1.left = _tmp3
+      _tmp1.right = _tmp2
+      _tmp2.parent = _tmp1
+      _tmp3.parent = _tmp1
+      _tmp3.right = _tmp4
+      if _tmp4: _tmp4.parent = _tmp3
+      if _tmp5: _tmp5.left = _tmp1
+      
+      if _tmp1.parent == None:
+        self.root = _tmp1
+    
+      # Update the subtree's heights
+      if _tmp4: __updateHeight(_tmp4)
+      else: __updateHeight(_tmp3)
+      
+
+    if pattern == "RR":
+      _tmp1 = p
+      _tmp2 = p.parent
+      _tmp3 = p.right
+      _tmp4 = p.left
+      _tmp5 = p.parent.parent
+      
+      __removeLink(_tmp1)
+      __removeLink(_tmp2)
+      __removeLink(_tmp3)
+      if _tmp4: __removeLink(_tmp4)
+      if _tmp5: __removeLink(_tmp5)
+      
+      _tmp1.parent = _tmp5
+      _tmp1.left = _tmp2
+      _tmp1.right = _tmp3
+      _tmp2.parent = _tmp1
+      _tmp2.right = _tmp4
+      _tmp3.parent = _tmp1
+      
+      if _tmp4: _tmp4.parent = _tmp2
+      if _tmp5: _tmp5.right = _tmp1
+      
+      if _tmp1.parent == None:
+        self.root = _tmp1
+    
+    # elif pattern == "LR":
+    #   first = _from
+    #   second = _from.left
+    #   third = _from.left.right
+    #   fourth = _from.left.right.left
+    #   third.parent = first
+    #   third.left = second
+    #   second.parent = third
+    #   first.left = third
+    #   if fourth : second.right = fourth
+
+      
+    
+    # elif pattern == "RL":
+    #   first = _from
+    #   second = _from.left
+    #   third = _from.left.right
+    #   fourth = _from.left.right.left
     
 
 #-- Main method
 tree = AVL()
+# tree.insert(50)
+# tree.insert(60)
+# tree.insert(70)
+# tree.insert(20)
 tree.insert(50)
-tree.insert(60)
-tree.insert(70)
+tree.insert(40)
+tree.insert(30)
 tree.print()
-tree.insert(55)
-tree.insert(52)
-tree.print()
-print(tree.root.element)
-#tree.delete(tree.search(55))
-tree.delete(tree.search(70))
-tree.print()
+# tree.insert(55)
+# tree.insert(52)
+# tree.print()
+# print(tree.root.element)
+# #tree.delete(tree.search(55))
+# tree.delete(tree.search(70))
+# tree.print()
 
 
