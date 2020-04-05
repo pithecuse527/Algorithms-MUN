@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
+"""
+  Assignment5 implementation using Graph ADT
+  201948932
+  Hong Geun Ji
+  03/04/20
+"""
+
 # Simple Vertex class
 class Vertex:
   """ Lightweight vertex structure for a graph.
@@ -25,6 +32,10 @@ class Vertex:
 
   def setLabel(self, label):
     """ Set label after the vertex has been created. """
+    if label not in ("UNEXPLORED", "VISITED"):     # validation check
+      print("The label is not valid...")
+      return
+    
     self._label = label
 
   def __str__(self):
@@ -54,6 +65,10 @@ class Edge:
 
   def setLabel(self, label):
     """ Set label after the edge has been created. """
+    if label not in ("UNEXPLORED", "DISCOVERY", "BACK"):     # validation check
+      print("The label is not valid...")
+      return
+    
     self._label = label
 
   def endpoints(self):
@@ -84,46 +99,58 @@ class Graph:
   """ Partial Graph ADT represented by an edge list structure."""
       
   #---- Graph implementation -------------------------
-  __slots__ = '_edges', '_vertices'
+  __slots__ = '_edges', '_vertices', '_DFS_lst'
 
   def __init__(self):
     self._edges    = []
     self._vertices = []
+    self._DFS_lst = []
 
   #-- Public methods
   def edges(self):
     """ Return all edges of the graph. """
     # ... Implement this (1)
-    return [] #replace to your one code
+    return self._edges
 
   def edgeCount(self):
     """ Return the number of edges in the graph. """
     # ... Implement this (2)
-    return [] #replace to your one code
+    return len(self._edges)
 
   def vertices(self):
     """ Return all vertices of the graph. """
     # ... Implement this (3)
-    return [] #replace to your one code
+    return self._vertices
 
   def vertexCount(self):
     """ Return the number of vertices in the graph. """
     # ... Implement this (4)
-    return [] #replace to your one code
+    return len(self._vertices)
 
   def getEdge(self, v1, v2):
     """ Return the edge with vertices v1 to v2, or None if not adjacent. """
     # ... Implement this (5)
-    return None #replace to your one code
+    for e in self.edges():    # check every edge in the list
+      if v1 in e.endpoints() and v2 in e.endpoints():    # based on undirected graph
+        return e
+    return None   # if cannot cannot find, return None
 
   def getVertexByValue(self, e):
     """ Return the vertex that has element of value e. """
     # ... Implement this (6)
-    return None #replace to your one code
+    for v in self.vertices():   # check every vertex in the list
+      if v.element() == e:
+        return v
+    return None   # if cannot cannot find, return None
+    
   def incidentEdges(self, v):
     """ Return a collection of all edges that are incident to vertex v in the graph. """
     # ... Implement this (7)
-    return [] #replace to your one code
+    incident_of_v = []    # make temp list for saving incident on v
+    for e in self.edges():
+      if e.isIncident(v):         # if the e is incident on v,
+        incident_of_v.append(e)   # save the e to the list
+    return incident_of_v
 
   def print(self):
     """ Print the edge list with the format:
@@ -131,6 +158,10 @@ class Graph:
     print("Edge List:" )
     for e in self.edges():
       print(e)
+    print()
+    print("Vertex List:")
+    for v in self.vertices():
+      print(v)
     print()
 
   def insert_vertex(self, x=None):
@@ -149,14 +180,41 @@ class Graph:
       raise ValueError('u and v are already adjacent')
     e = Edge(u, v, x)
     self._edges.append(e)
+  
+  def is_connected(self):
+    """Check whether the graph is connected or not.
+    If every vertex is VISITED after DFS, it means connected. 
+    If not, it is not connected.
+    """
     
-def DFS(g):
+    DFS(self)   # do DFS first
+    for v in self._vertices:
+      if v.getLabel() != "VISITED":   # if any vertex is not visited,
+        return False                # return False
+    return True
+
+def DFS(g, v = None, DFS_e_lst = []):
   # Implement the depth-first search algorithm from the class notes.
   # Collect the discovered edges that form the DFS tree of 'g' and return the collection
   # ... Implement this (8)
-  return [] #replace to your one code
-
-
+  if not v: v = g.vertices()[0]   # if this method called at the first time,
+  w = None
+  v.setLabel("VISITED")
+  
+  for e in g.incidentEdges(v):
+    if e.getLabel() == "UNEXPLORED":
+      w = e.opposite(v)
+      if w.getLabel() == "UNEXPLORED":
+        e.setLabel("DISCOVERY")
+        DFS_e_lst.append(e)
+        DFS(g, w)
+      else:
+        e.setLabel("BACK")
+  
+  if v == g.vertices()[0]:    # return the edge list only one time (if the DFS ends)
+    return DFS_e_lst
+  return
+  
 #-- Main method
 v_elements = ["A","B","C","D","E"]
 g = Graph()
@@ -184,16 +242,23 @@ for v in g.vertices():
 print()
 
 # Print the actual graph (in matrix form)
+print("=============== Before DFS ===============")
 g.print()
-print()
+print("==========================================\n")
 
-# Call DFS on g, to get the discovery edges
+
+#Call DFS on g, to get the discovery edges
 discovery = DFS(g)
 print("DFS edges:")
 for e in discovery:
   print(e)
 print()
 
+# Print the actual graph again after DFS (in matrix form)
+print("=============== After DFS ===============")
+g.print()
+print("==========================================\n")
+
 # Determine whether the graph is connected
 # ... Implement this (9)
-print("Graph is connected:", False) #replace to your one code
+print("Graph is connected:", g.is_connected())
