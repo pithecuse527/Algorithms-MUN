@@ -5,6 +5,8 @@
   201948932
   Hong Geun Ji
   03/04/20
+  
+  The graph from assignment5 is used for an example.
 """
 
 # Simple Vertex class
@@ -190,7 +192,7 @@ class Graph:
     DFS(self)   # do DFS first
     for v in self._vertices:
       if v.getLabel() != "VISITED":   # if any vertex is not visited,
-        return False                # return False
+        return False                  # return False
     return True
 
 def DFS(g, v = None, DFS_e_lst = []):
@@ -228,6 +230,7 @@ g.insert_edge(g.getVertexByValue("B"),g.getVertexByValue("D"))
 g.insert_edge(g.getVertexByValue("B"),g.getVertexByValue("E"))
 g.insert_edge(g.getVertexByValue("C"),g.getVertexByValue("D"))
 g.insert_edge(g.getVertexByValue("C"),g.getVertexByValue("E"))
+g.insert_edge(g.getVertexByValue("D"),g.getVertexByValue("E"))
 
 # Print all edges
 print("Edges:", g.edgeCount())
